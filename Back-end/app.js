@@ -18,7 +18,6 @@ const connectDB = require('./db/connect');
 
 //* Routes
 const routes = require('./routes/routes');
-const analyticalRoutes = require('./routes/analyticalRoutes');
 
 //* Swagger API
 const swaggerUI = require('swagger-ui-express');
@@ -45,8 +44,7 @@ app.use(express.static(path.join(__dirname, 'public')))
 app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocuments));
 
 //* API Routes
-app.use('/byexpertise', routes);
-app.use('/analytics', analyticalRoutes)
+app.use('/api', routes);
 
 //* Error Handling middleware
 app.use(notFoundMiddleware, errorHandlerMiddleware);

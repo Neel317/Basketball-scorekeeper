@@ -3,7 +3,6 @@ const router = express.Router();
 
 // Controllers
 const { login, register, dashboard } = require('../controllers/signup');
-const { verifyEmail } = require('../controllers/verifyEmail');
 
 // Middlewares
 const authMiddleware = require('../middlewares/auth');
