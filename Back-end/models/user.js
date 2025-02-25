@@ -11,7 +11,6 @@ const userSchema = mongoose.Schema({
     max: 255,
     default: null
   },
-  guestId: {type: String},
   email: {
     type: String,
     trim: true,
@@ -28,22 +27,8 @@ const userSchema = mongoose.Schema({
     type: String,
     required: [true, 'Please enter Password'],
   },
-  DOB: {
-    type: Date,
-  },
-  age: {
-    type: Number
-  },
   token: {
     type: String
-  },
-  role: {
-    type: String,
-    enum: {
-      values: ['tier-1', 'user', 'instructor'],
-      message: '${VALUE} is not a valid role.'
-    },
-    default: 'user'
   }
 })
 
