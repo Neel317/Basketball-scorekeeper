@@ -17,7 +17,7 @@ const authenticationMiddleware = async (req, res, next) => {
     const userData = jwt.verify(token, api_keys.JWT_KEY)
     req.user = { userId: userData.userId, email: userData.email };
     const user = await User.findOne({ email: userData.email });
-    if (user.verified) {
+    if (user) {
       next();
     } else {
       throw new UnauthenticatedError('Email is not Verified.')

@@ -5,11 +5,6 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const user = require('../models/user');
 
-// For Mail
-const EmailToken = require('../models/email-token');
-const crypto = require('crypto');
-const sendMail = require('../config/nodemailer.config');
-
 module.exports.login = async (req, res) => {
   const { email, password } = req.body;
   if (!email || !password) {
@@ -55,12 +50,6 @@ module.exports.register = async (req, res) => {
     email,
     password: ecncryptedPassword,
   })
-
-  let emailtoken = crypto.randomBytes(32).toString("hex");
-  await EmailToken.create({ userId: users._id, token: emailtoken });
-
-  const url = `${api_keys.URL}/byexpertise/user/verify/${users._id}/${emailtoken}`;
-  await sendMail(users.email, url);
 
   const token = jwt.sign({ user_id: users._id, email }, api_keys.JWT_KEY, { expiresIn: '1d' });
   users.token = token;
